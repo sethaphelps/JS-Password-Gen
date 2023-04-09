@@ -1,21 +1,17 @@
-// Assignment Code
 var generateBtn = document.querySelector("#generate");
 
-// function for password generation
 function generatePassword() {
-  var length = prompt("Choose a password length between 8 and 128 character");
-  if (isNaN(length)) {
-    // alert if other character is chosen instead of number
+  var lengthpw = prompt("Choose a password length between 8 and 128 character");
+  if (isNaN(lengthpw)) {
     alert("Must choose a number");
     return null;
   }
-  // alert for incorrect character amount
-  if (length < 8 || length > 128) {
+
+  if (lengthpw < 8 || lengthpw > 128) {
     alert("Must choose a number between 8 and 128");
     return null;
   }
 
-  // questions for user
   var lower = confirm("Would you like lowercase letters in your password?");
   var upper = confirm("Would you like uppercase letters in your password?");
   var number = confirm("Would you like numbers in your password?");
@@ -26,34 +22,43 @@ function generatePassword() {
     return null;
   }
 
-  // variables for password
-  var letter = "abcdefghijklmnopqrstuvwxyz";
-  var letterCap = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  var numb = "0123456789";
-  var spec = "!@#$%&*.?";
-  var containLow = false;
-  var containUp = false;
-  var containNum = false;
-  var containSpec = false;
-  passwordText = "";
-  var conf = "";
+  var letter = "abcdefghijklmnopqrstuvwxyz".split("");
+  var letterCap = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+  var numb = "0123456789".split("");
+  var spec = "!@#$%&*.?".split("");
+  var chars = [];
+  var result = [];
 
-  // if statements confirming chosen characters for password
   if (lower) {
-    conf += letter;
+    chars = chars.concat(letter);
   }
 
   if (upper) {
-    conf += letterCap;
+    chars = chars.concat(letterCap);
   }
 
   if (number) {
-    conf += numb;
+    chars = chars.concat(numb);
   }
 
   if (special) {
-    conf += spec;
+    chars = chars.concat(spec);
   }
+
+  for (var i = 0; i < lengthpw; i++) {
+    var element = chars[i];
+    console.log(element);
+    result.push(element);
+  }
+
+  return result.join("");
+}
+
+function getRandomChar(arr = []) {
+  var random = Math.floor(Math.random() * arr.length);
+  // stuck here - need to access the array
+  var char = [];
+  return char;
 }
 
 // Write password to the #password input
