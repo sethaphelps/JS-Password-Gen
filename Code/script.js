@@ -1,13 +1,13 @@
 var generateBtn = document.querySelector("#generate");
 
 function generatePassword() {
-  var lengthpw = prompt("Choose a password length between 8 and 128 character");
-  if (isNaN(lengthpw)) {
+  var length = prompt("Choose a password length between 8 and 128 character");
+  if (isNaN(length)) {
     alert("Must choose a number");
     return null;
   }
 
-  if (lengthpw < 8 || lengthpw > 128) {
+  if (length < 8 || length > 128) {
     alert("Must choose a number between 8 and 128");
     return null;
   }
@@ -22,46 +22,42 @@ function generatePassword() {
     return null;
   }
 
-  var letter = "abcdefghijklmnopqrstuvwxyz".split("");
-  var letterCap = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-  var numb = "0123456789".split("");
-  var spec = "!@#$%&*.?".split("");
-  var chars = [];
-  var result = [];
+  var letter = "abcdefghijklmnopqrstuvwxyz";
+  var letterCap = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  var numb = "0123456789";
+  var spec = "!@#$%&*.?";
+  var chars = "";
+  passwordText = "";
 
   if (lower) {
-    chars = chars.concat(letter);
+    chars += letter;
+    passwordText += letter.charAt(Math.floor(Math.random() * letter.length));
   }
 
   if (upper) {
-    chars = chars.concat(letterCap);
+    chars += letterCap;
+    passwordText += letterCap.charAt(
+      Math.floor(Math.random() * letterCap.length)
+    );
   }
 
   if (number) {
-    chars = chars.concat(numb);
+    chars += numb;
+    passwordText += numb.charAt(Math.floor(Math.random() * numb.length));
   }
 
   if (special) {
-    chars = chars.concat(spec);
+    chars += spec;
+    passwordText += spec.charAt(Math.floor(Math.random() * spec.length));
   }
 
-  for (var i = 0; i < lengthpw; i++) {
-    var element = chars[i];
-    console.log(element);
-    result.push(element);
+  for (var i = passwordText.length; i < length; i++) {
+    passwordText += chars.charAt(Math.floor(Math.random() * chars.length));
   }
 
-  return result.join("");
+  return passwordText;
 }
 
-function getRandomChar(arr = []) {
-  var random = Math.floor(Math.random() * arr.length);
-  // stuck here - need to access the array
-  var char = [];
-  return char;
-}
-
-// Write password to the #password input
 function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
@@ -69,5 +65,4 @@ function writePassword() {
   passwordText.value = password;
 }
 
-// Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
